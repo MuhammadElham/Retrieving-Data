@@ -35,16 +35,18 @@ for (i = 0; i < obj.length; i++) {
   const row = `<tr><td>${obj[i].name}</td><td>${obj[i].class}</td><td>${obj[i].roll}</td></tr>`;
   tableBody.innerHTML = tableBody.innerHTML + row;
 }
+
 // Search
 const tbData = document.getElementById("tableBodySearch");
 function forsearch() {
   const inpData = document.getElementById("search").value;
   // filter
   const filterData = obj.filter((student) => {
+    // filter hamesha poora object return karta hai jo condition satisfy kare,
     return student.name == inpData;
   });
-  console.log(filterData);
-  
+  // console.log(filterData);
+
   // innerhtml end
   tbData.innerHTML = "";
   // data show
@@ -62,4 +64,25 @@ function forsearch() {
     tbData.innerHTML += row;
   }
 }
+// OR
+// printing
+// tbSearch.innerHTML =
+//   filterOut.length > 0
+//     ? filterOut.map(
+//         (student) =>
+//           `<tr><td>${student.name}</td><td>${student.class}</td><td>${student.roll}</td></tr>`
+//       )
+//     : "<tr><td colspan=3>Not Found</td></tr>";
+// }
 // DropDown
+const tbdropDown = document.getElementById("tbDropDown");
+function chanegeFunction() {
+  let selectField = document.getElementById("stdDetails").value;
+  let classNumber = selectField.replace("class ", "");
+
+  const filterOut = obj.filter((student) => {
+    return student.class === parseInt(classNumber);
+  });
+  tbdropDown.innerHTML = filterOut.map((student) =>`<tr><td>${student.name}</td><td>${student.class}</td><td>${student.roll}</td></tr>`
+  ).join("");
+}
